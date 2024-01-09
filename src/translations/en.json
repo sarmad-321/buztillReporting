@@ -1,0 +1,19 @@
+{
+    "sell.openclose.openreg": "Open Register",
+    "sell.openclose.closereg": "Close Register",
+    "sell.cashlisting.title": "Cash Management",
+    "sell.cashlisting.subtitlebtn2": "Add Cash",
+    "sell.cashlisting.removecash": "Remove Cash",
+    "sell.salehistory.help": "Sales History",
+    "sell.settings.settings": "Settings",
+    "sell.settings.sellattributegroup": "Sell Attribute Group",
+    "sell.settings.sellattributes": "Sell Attribute",
+    "offline.status.offsalestatus": "Offline Sales Status",
+    "setup.outletsandregistersTitle": "Outlets And Registers",
+    "setup.salesTax.editOutletTitle": "Edit Outlet",
+    "setup.salesTax.addEditRegisterTitle": "Add Register",
+    "setup.outletsandregisters.updateReceiptTitle": "Update a Receipt Template",
+    "setup.outletsandregisters.createReceiptTitle": "Create a Receipt Template",
+    "printers.setup.screen": "Printers"
+  }
+  

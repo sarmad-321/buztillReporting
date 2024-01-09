@@ -1,0 +1,19 @@
+{
+    "sell.openclose.openreg": "Open Reġistru",
+    "sell.openclose.closereg": "Agħlaq Reġistru",
+    "sell.cashlisting.title": "Gestjoni tal-Flus",
+    "sell.cashlisting.subtitlebtn2": "Żid Flus",
+    "sell.cashlisting.removecash": "Neħħi Flus",
+    "sell.salehistory.help": "Storja tal-Bejgħ",
+    "sell.settings.settings": "Settings",
+    "sell.settings.sellattributegroup": "Grupp ta 'Attrbut tal-Bejgħ",
+    "sell.settings.sellattributes": "Attrbut tal-Bejgħ",
+    "offline.status.offsalestatus": "Storja tal-Bejgħ Offline",
+    "setup.outletsandregistersTitle": "Outlets u Reġistri",
+    "setup.salesTax.editOutletTitle": "Editja ta 'Outlet",
+    "setup.salesTax.addEditRegisterTitle": "Żid Reġistru",
+    "setup.outletsandregisters.updateReceiptTitle": "Aġġorna Templejt tal-Ħlas",
+    "setup.outletsandregisters.createReceiptTitle": "Oħloq Templejt tal-Ħlas",
+    "printers.setup.screen": "Stampanti"
+  }
+  
