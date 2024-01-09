@@ -48,6 +48,8 @@ const useMenuController = () => {
   useEffect(() => {
     let drawerEvent;
     let registerEvent;
+    let switchUserEvent;
+    let languageEvent;
     if (webViewRef.current.injectJavaScript) {
       drawerEvent = EventRegister.addEventListener('drawerPressEvent', item => {
         let data = {
@@ -67,7 +69,15 @@ const useMenuController = () => {
 
       switchUserEvent = EventRegister.addEventListener('switchUser', item => {
         let data = {
+          type: MobDataTypes.LOGIN,
           loginDetails: item,
+        };
+        sendToWeb(data);
+      });
+      languageEvent = EventRegister.addEventListener('language', item => {
+        let data = {
+          type: MobDataTypes.LANGUAGE,
+          payload: item,
         };
         sendToWeb(data);
       });
@@ -76,6 +86,7 @@ const useMenuController = () => {
       EventRegister.removeEventListener(drawerEvent);
       EventRegister.removeEventListener(registerEvent);
       EventRegister.removeEventListener(switchUserEvent);
+      EventRegister.removeEventListener(languageEvent);
     };
     // EventRegister.addEventListener('logout', item => {
     //   let data = {
@@ -146,12 +157,12 @@ const useMenuController = () => {
         break;
     }
   };
-  const handleTestPrint = async content => {
+  const handleTestPrint = async data => {
     try {
-      let printString = content + '\n[L]';
+      let printString = data.content + '\n[L]';
       const config = {
-        ip: '192.168.0.100',
-        port: 9100,
+        ip: data.ip,
+        port: data.port,
         payload: printString,
         autoCut: true,
         openCashbox: false,

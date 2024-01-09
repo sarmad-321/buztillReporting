@@ -13,6 +13,7 @@ import {changeLanguageReducer} from '../../store/slices/generalSlice';
 import SwitchUserDropdown from '../../components/Dropdown/SwitchUserDropdown';
 import {logout} from '../../store/slices/userSlice';
 import SwitchUserPopup from '../../components/popups/SwitchUserPopup';
+import {EventRegister} from 'react-native-event-listeners';
 
 const titles = {
   MenuScreen: 'Home',
@@ -46,7 +47,9 @@ const NavigationOptions = props => {
   const handleChangeLanguage = item => {
     i18n.changeLanguage(item.value);
     // setCurrentLanguage(item.label);
+
     dispatch(changeLanguageReducer(item));
+    EventRegister.emit('language', item.value);
   };
 
   const handleChangeUser = item => {

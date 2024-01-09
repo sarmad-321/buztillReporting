@@ -64,7 +64,6 @@ const SwitchUserPopup = props => {
   const dispatch = useDispatch();
   const passwordRef = useRef();
 
-  console.log(multipleUsers, 'multiple users ');
   useImperativeHandle(props?.reference, () => ({
     hide: hide,
     show: show,
@@ -135,7 +134,6 @@ const SwitchUserPopup = props => {
       dispatch(saveLoginDetails(response.data));
       EventRegister.emit('switchUser', response.data);
       hide();
-      console.log(response.data);
     } else {
       setError(response.msgDescription);
     }
