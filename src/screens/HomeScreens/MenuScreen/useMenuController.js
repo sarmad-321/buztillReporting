@@ -70,7 +70,9 @@ const useMenuController = () => {
       switchUserEvent = EventRegister.addEventListener('switchUser', item => {
         let data = {
           type: MobDataTypes.LOGIN,
-          loginDetails: item,
+          payload: {
+            loginDetails: item,
+          },
         };
         sendToWeb(data);
       });
@@ -113,7 +115,7 @@ const useMenuController = () => {
 
   const sendToWeb = data => {
     const message = JSON.stringify(data);
-    console.log(message);
+    console.log(data, 'webData');
     webViewRef.current.injectJavaScript(
       `window.recieveDataFromApp(${message})`,
     );
