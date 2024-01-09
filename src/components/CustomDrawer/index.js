@@ -108,8 +108,8 @@ const CustomDrawer = ({navigation}) => {
           dataMap.set(menuNavigationID, {
             name: displayText,
             url: menuURL,
-            // innerMenu: displayText == 'Setup' ? [{name: 'Printers'}] : [],
-            innerMenu: [],
+            innerMenu: displayText == 'Setup' ? [{name: 'Printers'}] : [],
+            // innerMenu: [],
           });
         });
 

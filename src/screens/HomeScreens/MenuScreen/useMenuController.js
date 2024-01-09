@@ -162,7 +162,7 @@ const useMenuController = () => {
       let printString = data.content + '\n[L]';
       const config = {
         ip: data.ip,
-        port: data.port,
+        port: parseInt(data.port),
         payload: printString,
         autoCut: true,
         openCashbox: false,
