@@ -18,12 +18,12 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required('Store name is required'),
 });
 
-const StoreForm = ({onNextPress, error}) => {
+const StoreForm = ({onNextPress, error, width}) => {
   const [validateOnChange, setValidateOnChange] = useState(false);
   const btnLoader = useSelector(state => state.general.btnLoader);
 
   return (
-    <View style={styles.innerForm}>
+    <View style={[styles.innerForm, width > 500 && {paddingHorizontal: '15%'}]}>
       {error && (
         <Animated.View
           entering={FadeIn.duration(200)}

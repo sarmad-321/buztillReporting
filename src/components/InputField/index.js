@@ -73,6 +73,7 @@ const InputField = props => {
             style={styles.input}
             placeholderTextColor={'#c1c1c1'}
             {...props}
+            secureTextEntry={showPassword}
           />
         </Pressable>
 

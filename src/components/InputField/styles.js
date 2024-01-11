@@ -3,16 +3,15 @@ import {vh, vw} from '../../utils/units';
 
 export const styles = StyleSheet.create({
   container: {
-    borderWidth: 0.7,
-    height: vh * 5.5,
+    borderWidth: 1,
+    height: 40,
     minWidth: vw * 17,
-    marginVertical: vh * 1,
+    marginVertical: 5,
     alignItems: 'center',
     paddingHorizontal: '3%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    borderRadius: vw * 0.5,
-    borderColor: 'red',
+    borderRadius: 3,
   },
   textContainer: {
     flexDirection: 'row',
@@ -25,8 +24,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   rightContainer: {
-    width: vh * 4,
-    height: vh * 4,
+    width: 25,
+    height: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -36,8 +35,8 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   iconContainer: {
-    width: vh * 4,
-    height: vh * 4,
+    width: 25,
+    height: 25,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: -vw * 0.5,

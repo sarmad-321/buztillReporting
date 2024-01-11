@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   },
   box: {
     borderWidth: 1,
-    width: vh * 2.5,
-    height: vh * 2.5,
+    width: 20,
+    height: 20,
     borderRadius: 2,
     marginRight: 5,
     justifyContent: 'center',

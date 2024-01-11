@@ -1,5 +1,12 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import {
+  DeviceEventEmitter,
+  Dimensions,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import ScreenWrapper from '../../../components/ScreenWrapper';
 import {styles} from './styles';
 import AuthHeader from '../../../components/AuthHeader';
@@ -29,30 +36,48 @@ const LoginScreen = () => {
     onForgetEmail,
     successMsg,
   } = useLoginController();
+  const [width, setWidth] = useState(Dimensions.get('window').width);
+
+  const handleOrientationChange = () => {
+    const {width, height} = Dimensions.get('window');
+    console.log(width, 'width');
+    setWidth(width);
+  };
+
+  useEffect(() => {
+    // Add dimension change listener
+    Dimensions.addEventListener('change', handleOrientationChange);
+
+    // Remove the listener when the component unmounts
+  }, []);
   return (
     <ScreenWrapper>
       <View style={styles.container}>
         <AuthHeader />
-        {currentForm == 'Login' && (
-          <Animated.View
-            entering={LightSpeedInRight.delay(1000).duration(900)}
-            style={styles.storeBtnContainer}>
-            <TouchableOpacity
-              onPress={() => notYourStorePress()}
-              style={styles.storeBtn}>
-              <Image style={styles.storeIcon} source={icons.store} />
-              <ArialBold style={{color: 'white'}}>{store?.storeName}</ArialBold>
-            </TouchableOpacity>
-            <Text style={{color: colors.primary}}>Not Your Store ?</Text>
-          </Animated.View>
-        )}
+
         <View style={styles.formContainer}>
+          {currentForm == 'Login' && (
+            <Animated.View
+              entering={LightSpeedInRight.delay(1000).duration(900)}
+              style={styles.storeBtnContainer}>
+              <TouchableOpacity
+                onPress={() => notYourStorePress()}
+                style={styles.storeBtn}>
+                <Image style={styles.storeIcon} source={icons.store} />
+                <ArialBold style={{color: 'white', fontSize: 16}}>
+                  {store?.storeName}
+                </ArialBold>
+              </TouchableOpacity>
+              <Text style={{color: colors.primary}}>Not Your Store ?</Text>
+            </Animated.View>
+          )}
           {currentForm == 'Store' && (
             <Animated.View
               entering={LightSpeedInRight.duration(900)}
               exiting={LightSpeedOutLeft.duration(700)}>
               <StoreForm
                 error={error}
+                width={width}
                 onNextPress={onNextPress}
                 setCurrentForm={setCurrentForm}
               />
@@ -62,6 +87,7 @@ const LoginScreen = () => {
             <Animated.View
               entering={LightSpeedInRight.delay(500).duration(900)}>
               <LoginForm
+                width={width}
                 error={error}
                 setCurrentForm={setCurrentForm}
                 onLoginPress={onLoginPress}
@@ -82,15 +108,17 @@ const LoginScreen = () => {
             </Animated.View>
           )}
         </View>
-        <View style={styles.swiperContainer}>
-          <Swiper
-            paginationStyle={{marginRight: vw * 42}}
-            dotStyle={styles.dotStyle}
-            activeDotColor="white">
-            <Slide1 />
-            <Slide1 />
-          </Swiper>
-        </View>
+        {width > 800 && (
+          <View style={styles.swiperContainer}>
+            <Swiper
+              paginationStyle={{marginRight: '80%'}}
+              dotStyle={styles.dotStyle}
+              activeDotColor="white">
+              <Slide1 />
+              <Slide1 />
+            </Swiper>
+          </View>
+        )}
       </View>
     </ScreenWrapper>
   );

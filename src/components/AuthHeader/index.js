@@ -5,14 +5,7 @@ import {icons, images} from '../../assets';
 import {colors} from '../../utils/theme';
 
 const AuthHeader = () => {
-  const containerSize = vh * 10; // Adjust as needed
-
-  return (
-    <View
-      style={[styles.container, {width: containerSize, height: containerSize}]}>
-      <Image source={images.appLogo} style={styles.logo} />
-    </View>
-  );
+  return <Image source={images.appLogo} style={styles.logo} />;
 };
 
 export default AuthHeader;
@@ -21,13 +14,20 @@ const styles = StyleSheet.create({
   container: {
     // flex: 0.35,
     // width: '60%',
+    backgroundColor: 'red',
+    width: vh * 10,
+    height: vh * 10,
     position: 'absolute',
     top: vh * 2,
     left: vw * 2,
   },
   logo: {
-    height: '100%',
-    width: '100%',
+    height: 70,
+    width: 70,
+    position: 'absolute',
+    top: vh * 2,
+    left: vw * 2,
     resizeMode: 'contain',
+    zIndex: 100,
   },
 });

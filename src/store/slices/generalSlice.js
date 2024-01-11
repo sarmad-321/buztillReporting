@@ -36,7 +36,11 @@ const slice = createSlice({
     },
     toggleRememberMe: (state, action) => {
       state.rememberMe = action.payload.remember;
-      state.savedUser = action.payload;
+      if (action.payload.remember) {
+        state.savedUser = action.payload;
+      } else {
+        state.savedUser = {email: '', password: ''};
+      }
     },
     addMultipleUsers: (state, action) => {
       let payload = action.payload;

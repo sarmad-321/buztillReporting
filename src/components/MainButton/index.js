@@ -38,17 +38,17 @@ export default MainButton;
 
 const styles = StyleSheet.create({
   container: {
-    height: vh * 5,
+    height: 40,
     width: '100%',
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: vw * 0.7,
+    borderRadius: 5,
     marginVertical: vh * 2,
   },
   buttonText: {
     color: 'white',
-    fontSize: vh * 2,
+    fontSize: 15,
     fontWeight: 'bold',
   },
 });

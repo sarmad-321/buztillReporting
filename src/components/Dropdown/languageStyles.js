@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ddd',
     backgroundColor: 'white',
-    height: vh * 4.5,
+    height: 35,
+    paddingHorizontal: 40,
   },
-  h1: {fontSize: vh * 1.8, color: 'black', textAlign: 'center'},
+  h1: {fontSize: 16, color: 'black', textAlign: 'center'},
   modal: {
     flex: 1,
     borderRadius: 10,
@@ -27,20 +28,19 @@ export const styles = StyleSheet.create({
   },
   innerContainer: {
     borderRadius: 20,
-    height: vh * 90,
-    backgroundColor: 'white',
-    marginTop: '7%',
-    width: '15%',
-    marginLeft: '35%',
+    marginTop: 90,
+
+    // width: '15%',
+    marginLeft: '45%',
   },
   notch: {
-    width: vh * 4,
-    height: vh * 4,
+    width: 30,
+    height: 30,
     backgroundColor: 'white',
     position: 'absolute',
     zIndex: 100,
-    top: -vh * 1,
-    right: vw * 1,
+    top: -5,
+    right: 10,
     transform: 'rotate(45deg)', // Rotate by 45 degrees
   },
 });

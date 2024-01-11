@@ -5,29 +5,28 @@ const {StyleSheet} = require('react-native');
 
 export const styles = StyleSheet.create({
   infoContainer: {
-    height: vh * 7,
-    width: vh * 50,
-    marginRight: vw * 3,
+    marginRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
+    // width: '40%',
   },
   roleContainer: {
     backgroundColor: '#e3e3e3',
-    height: vh * 3,
-    width: vw * 5,
+    height: 20,
+    width: 60,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
   },
   text: {
     color: 'black',
-    fontSize: vh * 1.6,
+    fontSize: 14,
   },
   profileContainer: {
-    height: vh * 5,
-    width: vh * 5,
+    height: 50,
+    width: 50,
     borderRadius: vh * 100,
-    marginLeft: vw * 1,
+    marginLeft: 10,
     overflow: 'hidden',
   },
   profile: {
@@ -38,19 +37,19 @@ export const styles = StyleSheet.create({
   languageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '40%',
     marginRight: vw * 3,
   },
   flag: {
-    width: vh * 3,
-    height: vh * 3,
+    width: 25,
+    height: 25,
     resizeMode: 'contain',
-    marginRight: vw * 1,
+    marginRight: 10,
   },
   icon: {
-    width: vh * 1.5,
-    height: vh * 1.5,
+    width: 18,
+    height: 18,
     resizeMode: 'contain',
-    marginLeft: vw * 1,
+    marginLeft: 5,
+    marginRight: 20,
   },
 });

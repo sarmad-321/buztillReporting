@@ -58,10 +58,8 @@ const LanguageDropDown = props => {
         <TouchableOpacity
           style={{
             height: '100%',
-            width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
-            paddingHorizontal: '4%',
           }}
           onPress={() => {
             setVisible(false);

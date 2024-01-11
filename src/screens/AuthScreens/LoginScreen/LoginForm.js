@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
     .min(6, 'Password should be atleast 6 characters'),
 });
 
-const LoginForm = ({onLoginPress, error, setCurrentForm}) => {
+const LoginForm = ({onLoginPress, error, setCurrentForm, width}) => {
   const [validateOnChange, setValidateOnChange] = useState(false);
   const btnLoader = useSelector(state => state.general.btnLoader);
   const rememberState = useSelector(state => state.general.rememberMe);
@@ -31,7 +31,7 @@ const LoginForm = ({onLoginPress, error, setCurrentForm}) => {
   const scrollRef = useRef();
   const passwordRef = useRef();
   return (
-    <View style={styles.innerForm}>
+    <View style={[styles.innerForm, width > 500 && {paddingHorizontal: '15%'}]}>
       {error && (
         <Animated.View
           entering={FadeIn.duration(200)}
