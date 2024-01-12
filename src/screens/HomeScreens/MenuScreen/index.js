@@ -15,7 +15,7 @@ const MenuScreen = () => {
       )}
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://192.168.0.107:3000?ismobapp=1'}}
+        source={{uri: 'http://192.168.0.107:3000?ismobapp=2'}}
         onMessage={event => {
           console.log(
             'Received data from React.js:',

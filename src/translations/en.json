@@ -1,4 +1,5 @@
 {
+    "app.reporting.dashboard" : "Dashboard",
     "sell.openclose.openreg": "Open Register",
     "sell.openclose.closereg": "Close Register",
     "sell.cashlisting.title": "Cash Management",

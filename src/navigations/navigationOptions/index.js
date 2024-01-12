@@ -73,16 +73,15 @@ const NavigationOptions = props => {
             onPress={() => languageDD.current.show()}
             style={styles.languageContainer}>
             <Image source={icons.americanFlag} style={styles.flag} />
-            <Text>{currentLanguage?.label}</Text>
             <Image source={icons.dropdown} style={styles.icon} />
           </TouchableOpacity>
-          <View>
+          {/* <View>
             <ArialBold>{menuInfo?.userName}</ArialBold>
             <View style={styles.roleContainer}>
               <Text style={styles.text}>{menuInfo?.roleName}</Text>
             </View>
-          </View>
-          <TouchableOpacity
+          </View> */}
+          {/* <TouchableOpacity
             onPress={() => switchDD.current.show()}
             style={styles.profileContainer}>
             <Image
@@ -94,7 +93,7 @@ const NavigationOptions = props => {
                     images.dummyProfile
               }
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <LanguageDropDown
             reference={languageDD}
             values={Languages}

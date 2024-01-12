@@ -2,7 +2,6 @@ import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {MobDataTypes, PostAppTypes} from '../../../utils/constants';
 import {EventRegister} from 'react-native-event-listeners';
-import {getMenusService} from '../../../api/Auth';
 import {
   logout,
   saveOutlet,
@@ -10,25 +9,22 @@ import {
 } from '../../../store/slices/userSlice';
 import NetInfo from '@react-native-community/netinfo';
 import {onMenuChange} from '../../../store/slices/generalSlice';
-import {useTranslation} from 'react-i18next';
-import i18next from 'i18next';
+
 import ThermalPrinterModule from 'react-native-thermal-printer';
+import {useNavigation} from '@react-navigation/native';
 
 const useMenuController = () => {
   const webViewRef = useRef(null);
   const user = useSelector(state => state.user);
   const [webViewLoading, setWebViewLoading] = useState(true);
   const currentLanguage = useSelector(state => state.general.currentLanguage);
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentLanguage) {
-      let data = {
-        type: MobDataTypes.LANGUAGE,
-        payload: currentLanguage,
-      };
-      sendToWeb(data);
+      updateLanguage();
     }
   }, [currentLanguage]);
 
@@ -79,7 +75,7 @@ const useMenuController = () => {
       languageEvent = EventRegister.addEventListener('language', item => {
         let data = {
           type: MobDataTypes.LANGUAGE,
-          payload: item,
+          payload: item.value,
         };
         sendToWeb(data);
       });
@@ -105,12 +101,22 @@ const useMenuController = () => {
       payload: {
         loginDetails: user?.loginDetails,
         storeInfo: user?.store,
+        appType: 2,
       },
       type: MobDataTypes.LOGIN,
     };
     if (webViewRef?.current?.injectJavaScript) {
       sendToWeb(data);
     }
+  };
+
+  const updateLanguage = () => {
+    console.log(MobDataTypes, currentLanguage, 'test');
+    let data = {
+      type: MobDataTypes.LANGUAGE,
+      payload: currentLanguage.value,
+    };
+    sendToWeb(data);
   };
 
   const sendToWeb = data => {
@@ -133,6 +139,9 @@ const useMenuController = () => {
     switch (data.type) {
       case PostAppTypes.LOGIN_DONE:
         setWebViewLoading(false);
+        if (currentLanguage) {
+          updateLanguage();
+        }
         break;
       case PostAppTypes.SETUP_DONE:
         onUrlLoaded();

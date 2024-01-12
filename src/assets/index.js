@@ -19,7 +19,14 @@ export const icons = {
   maltaFlag: require('./icons/malta.png'),
   error: require('./icons/error.png'),
   back: require('./icons/back.png'),
-
+  inventory: require('./icons/inventory.png'),
+  menuTiles: require('./icons/menuTiles.png'),
+  paymentReports: require('./icons/payment-reports.png'),
+  registers: require('./icons/registers.png'),
+  retail: require('./icons/retail.png'),
+  salesReports: require('./icons/salesreports.png'),
+  storeCredits: require('./icons/storeCredits.png'),
+  taxReport: require('./icons/taxreports.png'),
 };
 
 export const images = {

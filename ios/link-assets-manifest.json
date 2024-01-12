@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Arial-Rounded-Bold.ttf",
+      "sha1": "dde8a3ece16c9d89bc532c1e4a396fae52d984f2"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Medium.ttf",
+      "sha1": "e76f580811e031813e7150131a0724811cdd737a"
+    }
+  ]
+}

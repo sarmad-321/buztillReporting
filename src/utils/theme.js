@@ -7,5 +7,6 @@ export const colors = {
   green: '#08a982',
   red: '#b61a21',
   lightShade: '#00000057',
-  transparentShade: '#0a3b57',
+  transparentShade: '#ffffff2b',
+  drawerIcons: '#ffffff9e',
 };

@@ -40,14 +40,14 @@ export const styles = StyleSheet.create({
     marginRight: vw * 3,
   },
   flag: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
     marginRight: 10,
   },
   icon: {
-    width: 18,
-    height: 18,
+    width: 14,
+    height: 14,
     resizeMode: 'contain',
     marginLeft: 5,
     marginRight: 20,

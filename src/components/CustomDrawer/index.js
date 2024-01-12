@@ -21,74 +21,25 @@ import {useNavigation} from '@react-navigation/native';
 import {getMenusService} from '../../api/Auth';
 import MainButton from '../MainButton';
 import {onMenuChange, saveUserInfo} from '../../store/slices/generalSlice';
+import {POS_APP_TYPES} from '../../utils/constants';
+import Divider from '../Divider';
 
 const iconsforDrawer = {
-  Sell: icons.cart,
-  Setup: icons.settings,
-};
-
-const RenderHeader = ({section, _, isActive}) => {
-  const rotateValue = useRef(new Animated.Value(0)).current;
-
-  const rotateDown = () => {
-    Animated.timing(rotateValue, {
-      toValue: 90,
-      duration: 300, // Adjust the duration as needed
-      easing: Easing.linear, // Adjust the easing function as needed
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const rotateUp = () => {
-    Animated.timing(rotateValue, {
-      toValue: 0,
-      duration: 300, // Adjust the duration as needed
-      easing: Easing.linear, // Adjust the easing function as needed
-      useNativeDriver: false,
-    }).start();
-  };
-
-  useEffect(() => {
-    if (isActive) {
-      rotateDown();
-    } else {
-      rotateUp();
-    }
-  }, [isActive]);
-  return (
-    <View key={section.name} style={styles.btnContainer}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Image
-          source={iconsforDrawer[section.name]}
-          style={[styles.icon, {marginRight: vw * 1}]}
-        />
-        <ArialBold style={{color: 'white'}}>{section.name}</ArialBold>
-      </View>
-      <Animated.Image
-        source={icons.rightArrow}
-        style={[
-          styles.dropdown,
-          {
-            transform: [
-              {
-                rotate: rotateValue.interpolate({
-                  inputRange: [0, 90],
-                  outputRange: ['0deg', '90deg'],
-                }),
-              },
-            ],
-          },
-        ]}
-      />
-    </View>
-  );
+  Dashboard: icons.menuTiles,
+  'Retail Dashboard': icons.retail,
+  'Sales Reports': icons.salesReports,
+  'Inventory Reports': icons.inventory,
+  'Payment Reports': icons.paymentReports,
+  'Register Closures': icons.registers,
+  'Store Credit Reports': icons.storeCredits,
+  'Tax Reports': icons.taxReport,
 };
 
 const CustomDrawer = ({navigation}) => {
-  const [activeSection, setActiveSection] = useState([]);
   const user = useSelector(state => state.user);
   const [menu, setMenu] = useState([]);
   const dispatch = useDispatch();
+  const menuInfo = useSelector(state => state.general.menuInfo);
 
   useEffect(() => {
     getMenus();
@@ -96,40 +47,32 @@ const CustomDrawer = ({navigation}) => {
   const getMenus = () => {
     const transformedData = [];
 
-    getMenusService(1)
+    getMenusService(POS_APP_TYPES.REPORTING)
       .then(res => {
         let data = res.data.menus;
         let storeInfo = res.data.storeInfo;
         dispatch(saveUserInfo(storeInfo));
-
-        const dataMap = new Map();
-        data.forEach(item => {
-          const {menuNavigationID, displayText, menuURL} = item;
-          dataMap.set(menuNavigationID, {
-            name: displayText,
-            url: menuURL,
-            innerMenu: displayText == 'Setup' ? [{name: 'Printers'}] : [],
-            // innerMenu: [],
-          });
-        });
+        console.log(data, 'menu');
+        const dataMap = [];
+        // data.forEach(item => {
+        //   const {menuNavigationID, displayText, menuURL} = item;
+        //   dataMap.set(menuNavigationID, {
+        //     name: displayText,
+        //     url: menuURL,
+        //     innerMenu: [],
+        //   });
+        // });
 
         // Iterate over the data and add innerMenu names to their parent
         data.forEach(item => {
-          const {parentMenuNavigationID} = item;
-          if (parentMenuNavigationID !== 0) {
-            const parentItem = dataMap.get(parentMenuNavigationID);
-            if (parentItem) {
-              let newObject = {
-                name: item.displayText,
-                url: item.menuURL,
-              };
-              parentItem.innerMenu.push(newObject);
-            }
-          } else {
-            transformedData.push(dataMap.get(item.menuNavigationID));
-          }
+          let newObject = {
+            name: item.displayText,
+            url: item.menuURL,
+          };
+          dataMap.push(newObject);
         });
-        setMenu(transformedData);
+        console.log(dataMap, 'dataMap');
+        setMenu(dataMap);
       })
       .catch(res => {
         if (res.status == 401) {
@@ -154,7 +97,6 @@ const CustomDrawer = ({navigation}) => {
   };
 
   const handleMenuPress = async item => {
-    setActiveSection([]);
     dispatch(onMenuChange(item.name));
     navigation.closeDrawer();
     console.log(item);
@@ -167,58 +109,53 @@ const CustomDrawer = ({navigation}) => {
     }
   };
 
-  const handleRegisterPress = () => {
-    navigation.closeDrawer();
-    EventRegister.emit('register');
+  const RenderHeader = ({section}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => handleMenuPress(section)}
+        key={section.name}
+        style={styles.btnContainer}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image source={iconsforDrawer[section.name]} style={[styles.icon]} />
+          <ArialBold style={styles.innerText}>{section.name}</ArialBold>
+        </View>
+      </TouchableOpacity>
+    );
   };
-
-  const renderContent = section => (
-    <View>
-      {section?.innerMenu.map(item => {
-        return (
-          <TouchableOpacity
-            onPress={() => handleMenuPress(item)}
-            key={item.name}
-            style={styles.list}>
-            <ArialBold style={styles.innerText}>{item.name}</ArialBold>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
 
   return (
     <View style={styles.container}>
       <Image source={images.appLogoV1} style={styles.logo} />
-      <ArialBold style={styles.registerText}>{user.outlet?.outlet}</ArialBold>
-      <ArialBold style={styles.registerText}>
-        {user.register?.register}
-      </ArialBold>
-      <MainButton
-        onPress={handleRegisterPress}
-        title="Select Register"
-        style={styles.button}
-      />
-      <Accordion
-        sections={menu}
-        renderHeader={(section, _, isActive) => (
-          <RenderHeader section={section} isActive={isActive} />
-        )}
-        renderContent={renderContent}
-        activeSections={activeSection}
-        onChange={item => setActiveSection(item)}
-      />
+      <Divider />
+
+      {menu.map(item => {
+        return <RenderHeader section={item} />;
+      })}
+      <Divider />
       <TouchableOpacity
         onPress={handleLogoutPress}
         style={[styles.btnContainer]}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            source={icons.logout}
-            style={[styles.icon, {marginRight: vw * 1}]}
-          />
-          <ArialBold style={{color: 'white'}}>Logout</ArialBold>
+          <Image source={icons.logout} style={[styles.icon]} />
+          <ArialBold style={styles.innerText}>Logout</ArialBold>
         </View>
       </TouchableOpacity>
+      <View style={styles.profileBoxContainer}>
+        <TouchableOpacity style={styles.profileContainer}>
+          <Image
+            style={styles.profile}
+            source={
+              user?.profileImageURL ? images.dummyProfile : images.dummyProfile
+            }
+          />
+        </TouchableOpacity>
+        <View>
+          <ArialBold style={{color: 'white'}}>{menuInfo?.userName}</ArialBold>
+          <Text style={styles.text}>{menuInfo?.roleName}</Text>
+          {/* <View style={styles.roleContainer}>
+          </View> */}
+        </View>
+      </View>
     </View>
   );
 };
@@ -226,11 +163,35 @@ const CustomDrawer = ({navigation}) => {
 export default CustomDrawer;
 
 const styles = StyleSheet.create({
+  profileBoxContainer: {
+    flexDirection: 'row',
+    height: 60,
+    width: '100%',
+    position: 'absolute',
+    backgroundColor: colors.transparentShade,
+    bottom: 0,
+    alignItems: 'center',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: '10%',
+  },
   container: {
     backgroundColor: colors.secondary,
     flex: 1,
     // height: vh * 100,
     paddingTop: vh * 5,
+  },
+  profileContainer: {
+    height: 40,
+    width: 40,
+    borderRadius: vh * 100,
+    overflow: 'hidden',
+    marginRight: 15,
+  },
+  profile: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'cover',
   },
   logo: {
     width: 80,
@@ -241,20 +202,32 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     width: '65%',
-    height: 40,
+    height: 35,
     alignSelf: 'center',
     borderRadius: 4,
-    marginVertical: 8,
+    marginVertical: 4,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: vw * 1,
+  },
+  roleContainer: {
+    backgroundColor: '#e3e3e3',
+    height: 20,
+    width: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+  },
+  text: {
+    color: '#8190a3',
+    fontSize: 14,
   },
   icon: {
     width: 20,
     height: 20,
     resizeMode: 'contain',
-    tintColor: 'white',
+    tintColor: colors.drawerIcons,
+    marginRight: 15,
   },
   dropdown: {
     width: 15,
@@ -265,10 +238,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.transparentShade,
     paddingHorizontal: '22%',
     justifyContent: 'center',
-    height: vh * 5,
+    height: 40,
   },
   innerText: {
     color: 'white',
+    fontSize: 14,
   },
   registerText: {
     color: 'white',
