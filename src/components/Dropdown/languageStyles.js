@@ -29,9 +29,10 @@ export const styles = StyleSheet.create({
   innerContainer: {
     borderRadius: 20,
     marginTop: 90,
-
+    alignSelf: 'flex-end',
+    marginRight: '5%',
     // width: '15%',
-    marginLeft: '45%',
+    // marginLeft: '45%',
   },
   notch: {
     width: 30,

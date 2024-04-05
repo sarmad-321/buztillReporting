@@ -29,7 +29,7 @@ const HomeNavigator = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(onMenuChange('Sell'));
+    dispatch(onMenuChange('Dashboard'));
   }, []);
 
   return (

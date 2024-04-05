@@ -21,13 +21,13 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   innerForm: {
-    paddingHorizontal: '3%',
+    paddingHorizontal: '1%',
     // backgroundColor: 'green',
     // marginTop: vh * 5,
   },
   heading: {
     fontSize: 20,
-    marginBottom: 10,
+    marginBottom: 15,
   },
   slide: {
     // height: vh * 100,
@@ -99,9 +99,9 @@ export const styles = StyleSheet.create({
     width: 150,
     position: 'absolute',
     // left: vw * 35,
-    right: 0,
+    right: -10,
     zIndex: 100,
-    top: 20,
+    top: -5,
     alignItems: 'center',
   },
   storeIcon: {

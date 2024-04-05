@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
 import React, {useRef, useState} from 'react';
 import InputField from '../../../components/InputField';
 import MainButton from '../../../components/MainButton';
@@ -13,7 +13,11 @@ import * as Yup from 'yup';
 import {vh} from '../../../utils/units';
 import {useSelector} from 'react-redux';
 import Error from '../../../components/Error';
-import Animated, {FadeIn, LightSpeedOutLeft} from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  LightSpeedInRight,
+  LightSpeedOutLeft,
+} from 'react-native-reanimated';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email('Email is not valid'),
@@ -22,7 +26,14 @@ const validationSchema = Yup.object().shape({
     .min(6, 'Password should be atleast 6 characters'),
 });
 
-const LoginForm = ({onLoginPress, error, setCurrentForm, width}) => {
+const LoginForm = ({
+  onLoginPress,
+  error,
+  setCurrentForm,
+  width,
+  store,
+  currentForm,
+}) => {
   const [validateOnChange, setValidateOnChange] = useState(false);
   const btnLoader = useSelector(state => state.general.btnLoader);
   const rememberState = useSelector(state => state.general.rememberMe);
@@ -31,7 +42,24 @@ const LoginForm = ({onLoginPress, error, setCurrentForm, width}) => {
   const scrollRef = useRef();
   const passwordRef = useRef();
   return (
-    <View style={[styles.innerForm, width > 500 && {paddingHorizontal: '15%'}]}>
+    <View style={[styles.innerForm, width > 500 && {marginHorizontal: '13%'}]}>
+      {currentForm == 'Login' && (
+        <Animated.View
+          entering={LightSpeedInRight.delay(1000).duration(900)}
+          style={styles.storeBtnContainer}>
+          <TouchableOpacity
+            onPress={() => notYourStorePress()}
+            style={styles.storeBtn}>
+            <Image style={styles.storeIcon} source={icons.store} />
+            <ArialBold style={{color: 'white', fontSize: 16}}>
+              {store?.storeName}
+            </ArialBold>
+          </TouchableOpacity>
+          <Text style={{color: colors.primary, fontSize: 14}}>
+            Not Your Store ?
+          </Text>
+        </Animated.View>
+      )}
       {error && (
         <Animated.View
           entering={FadeIn.duration(200)}

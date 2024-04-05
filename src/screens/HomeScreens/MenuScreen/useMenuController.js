@@ -193,6 +193,7 @@ const useMenuController = () => {
     webViewLoading,
     webViewRef,
     handleDataFromWweb,
+    user,
   };
 };
 

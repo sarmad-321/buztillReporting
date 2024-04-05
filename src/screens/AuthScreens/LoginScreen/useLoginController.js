@@ -79,7 +79,7 @@ const useLoginController = () => {
     if (response.data) {
       dispatch(saveLoginDetails(response.data));
       navigation.replace('HomeNavigator');
-      dispatch(onMenuChange('Sell'));
+      dispatch(onMenuChange('Dashboard'));
     } else {
       setError(response.msgDescription);
     }

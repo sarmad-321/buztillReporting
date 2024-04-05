@@ -1,11 +1,9 @@
 import {colors} from '../../utils/theme';
 import {vh, vw} from '../../utils/units';
-
-const {StyleSheet} = require('react-native');
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   infoContainer: {
-    marginRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     // width: '40%',
@@ -37,7 +35,8 @@ export const styles = StyleSheet.create({
   languageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: vw * 3,
+    alignSelf: 'flex-end',
+    marginRight: '3%',
   },
   flag: {
     width: 20,

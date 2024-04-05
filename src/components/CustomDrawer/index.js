@@ -33,6 +33,7 @@ const iconsforDrawer = {
   'Register Closures': icons.registers,
   'Store Credit Reports': icons.storeCredits,
   'Tax Reports': icons.taxReport,
+  'Other Reports': icons.taxReport,
 };
 
 const CustomDrawer = ({navigation}) => {
@@ -126,6 +127,24 @@ const CustomDrawer = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image source={images.appLogoV1} style={styles.logo} />
+      <View style={styles.profileBoxContainer}>
+        <TouchableOpacity style={styles.profileContainer}>
+          <Image
+            style={styles.profile}
+            source={
+              user?.profileImageURL ? images.dummyProfile : images.dummyProfile
+            }
+          />
+        </TouchableOpacity>
+        <View>
+          <ArialBold style={{color: 'white'}}>
+            Hello {menuInfo?.userName}
+          </ArialBold>
+          <Text style={styles.text}>{menuInfo?.roleName}</Text>
+          {/* <View style={styles.roleContainer}>
+          </View> */}
+        </View>
+      </View>
       <Divider />
 
       {menu.map(item => {
@@ -140,7 +159,7 @@ const CustomDrawer = ({navigation}) => {
           <ArialBold style={styles.innerText}>Logout</ArialBold>
         </View>
       </TouchableOpacity>
-      <View style={styles.profileBoxContainer}>
+      {/* <View style={styles.profileBoxContainer}>
         <TouchableOpacity style={styles.profileContainer}>
           <Image
             style={styles.profile}
@@ -152,10 +171,9 @@ const CustomDrawer = ({navigation}) => {
         <View>
           <ArialBold style={{color: 'white'}}>{menuInfo?.userName}</ArialBold>
           <Text style={styles.text}>{menuInfo?.roleName}</Text>
-          {/* <View style={styles.roleContainer}>
-          </View> */}
+    
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -166,14 +184,14 @@ const styles = StyleSheet.create({
   profileBoxContainer: {
     flexDirection: 'row',
     height: 60,
-    width: '100%',
-    position: 'absolute',
-    backgroundColor: colors.transparentShade,
+    width: '70%',
+    // position: 'absolute',
+    // backgroundColor: colors.transparentShade,
     bottom: 0,
-    alignItems: 'center',
+    alignSelf: 'center',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    paddingHorizontal: '10%',
+    // paddingHorizontal: '15%',
   },
   container: {
     backgroundColor: colors.secondary,
@@ -199,6 +217,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
     tintColor: colors.primary,
+    position: 'absolute',
+    bottom: 0,
   },
   btnContainer: {
     width: '65%',

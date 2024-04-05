@@ -16,7 +16,7 @@ export default function TextWrapper(props) {
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 18,
+    fontSize: 17,
     color: 'black',
   },
 });

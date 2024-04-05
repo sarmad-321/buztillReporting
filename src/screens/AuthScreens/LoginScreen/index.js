@@ -56,7 +56,7 @@ const LoginScreen = () => {
         <AuthHeader />
 
         <View style={styles.formContainer}>
-          {currentForm == 'Login' && (
+          {/* {currentForm == 'Login' && (
             <Animated.View
               entering={LightSpeedInRight.delay(1000).duration(900)}
               style={styles.storeBtnContainer}>
@@ -70,7 +70,7 @@ const LoginScreen = () => {
               </TouchableOpacity>
               <Text style={{color: colors.primary}}>Not Your Store ?</Text>
             </Animated.View>
-          )}
+          )} */}
           {currentForm == 'Store' && (
             <Animated.View
               entering={LightSpeedInRight.duration(900)}
@@ -89,8 +89,10 @@ const LoginScreen = () => {
               <LoginForm
                 width={width}
                 error={error}
+                currentForm={currentForm}
                 setCurrentForm={setCurrentForm}
                 onLoginPress={onLoginPress}
+                store={store}
               />
             </Animated.View>
           )}

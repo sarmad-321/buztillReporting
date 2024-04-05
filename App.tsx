@@ -1,5 +1,5 @@
 import 'intl-pluralrules';
-import {StyleSheet, StatusBar, View, useColorScheme} from 'react-native';
+import {StyleSheet, StatusBar, View, useColorScheme, Text} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import MainNavigator from './src/navigations/MainNavigator';
 import SplashScreen from 'react-native-splash-screen';
@@ -14,6 +14,10 @@ import mt from './src/translations/maltese.json';
 
 const App = () => {
   const theme = useColorScheme();
+
+  Text.defaultProps = Text.defaultProps || {};
+  Text.defaultProps.allowFontScaling = false;
+  Text.defaultProps.adjustsFontSizeToFit = false;
 
   i18n
     .use(initReactI18next) // passes i18n down to react-i18next

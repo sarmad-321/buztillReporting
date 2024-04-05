@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {store} from '../store';
-import {logout} from '../store/slices/userSlice';
 import {REACT_APP_API_ENDPOINT} from '@env';
+import {logout} from '../store/slices/userSlice';
 
 const version = 'v1/';
 

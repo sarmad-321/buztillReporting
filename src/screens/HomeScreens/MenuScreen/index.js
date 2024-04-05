@@ -5,7 +5,8 @@ import useMenuController from './useMenuController';
 import {styles} from './styles';
 
 const MenuScreen = () => {
-  const {webViewLoading, webViewRef, handleDataFromWweb} = useMenuController();
+  const {webViewLoading, webViewRef, user, handleDataFromWweb} =
+    useMenuController();
   return (
     <View style={{height: '100%'}}>
       {webViewLoading && (
@@ -15,7 +16,10 @@ const MenuScreen = () => {
       )}
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://192.168.0.107:3000?ismobapp=2'}}
+        source={{
+          uri: `https://${user.store?.storeName}.buzztill.com?ismobapp=2`,
+          // uri: `http://192.168.0.117:3000?ismobapp=1`,
+        }}
         onMessage={event => {
           console.log(
             'Received data from React.js:',
