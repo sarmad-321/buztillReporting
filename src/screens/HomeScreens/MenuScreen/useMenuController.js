@@ -1,6 +1,10 @@
 import {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {MobDataTypes, PostAppTypes} from '../../../utils/constants';
+import {
+  MobDataTypes,
+  POS_APP_TYPES,
+  PostAppTypes,
+} from '../../../utils/constants';
 import {EventRegister} from 'react-native-event-listeners';
 import {
   logout,
@@ -19,7 +23,7 @@ const useMenuController = () => {
   const [webViewLoading, setWebViewLoading] = useState(true);
   const currentLanguage = useSelector(state => state.general.currentLanguage);
   const navigation = useNavigation();
-
+  console.log(currentLanguage, 'Current Language');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -101,7 +105,7 @@ const useMenuController = () => {
       payload: {
         loginDetails: user?.loginDetails,
         storeInfo: user?.store,
-        appType: 2,
+        appType: POS_APP_TYPES.REPORTING,
       },
       type: MobDataTypes.LOGIN,
     };

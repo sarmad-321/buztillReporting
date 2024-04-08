@@ -31,6 +31,7 @@ const LoginForm = ({
   error,
   setCurrentForm,
   width,
+  notYourStorePress,
   store,
   currentForm,
 }) => {

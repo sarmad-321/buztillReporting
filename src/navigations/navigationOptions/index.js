@@ -31,21 +31,33 @@ const NavigationOptions = props => {
   const menuInfo = useSelector(state => state.general.menuInfo);
   const currentLanguage = useSelector(state => state.general.currentLanguage);
   // const [currentLanguage, setCurrentLanguage] = useState('English');
+  const Languages = [
+    {
+      label: 'English',
+      value: 'en',
+      flag: require('../../assets/icons/america.png'),
+    },
+    {
+      label: 'Maltese',
+      value: 'mt',
+      flag: require('../../assets/icons/malta.png'),
+    },
+  ];
+  const [localCurrentLanguage, setLocalCurrentLaguage] = useState(Languages[0]);
+
   const languageDD = useRef();
   const switchDD = useRef();
   const switchPopup = useRef();
 
   const dispatch = useDispatch();
   const {t} = useTranslation();
-  const Languages = [
-    {label: 'English', value: 'en'},
-    {label: 'Maltese', value: 'mt'},
-  ];
+
   const user = useSelector(state => state.user.loginDetails);
 
   const handleChangeLanguage = item => {
     i18n.changeLanguage(item.value);
     // setCurrentLanguage(item.label);
+    setLocalCurrentLaguage(item);
     dispatch(changeLanguageReducer(item));
   };
 
@@ -72,7 +84,7 @@ const NavigationOptions = props => {
           <TouchableOpacity
             onPress={() => languageDD.current.show()}
             style={styles.languageContainer}>
-            <Image source={icons.americanFlag} style={styles.flag} />
+            <Image source={currentLanguage.flag} style={styles.flag} />
             <Image source={icons.dropdown} style={styles.icon} />
           </TouchableOpacity>
           {/* <View>

@@ -41,14 +41,16 @@ const CustomDrawer = ({navigation}) => {
   const [menu, setMenu] = useState([]);
   const dispatch = useDispatch();
   const menuInfo = useSelector(state => state.general.menuInfo);
+  const currentLanguage = useSelector(state => state.general.currentLanguage);
 
   useEffect(() => {
-    getMenus();
-  }, [user]);
+    getMenus(currentLanguage);
+  }, [user, currentLanguage]);
+
   const getMenus = () => {
     const transformedData = [];
 
-    getMenusService(POS_APP_TYPES.REPORTING)
+    getMenusService(POS_APP_TYPES.REPORTING, currentLanguage)
       .then(res => {
         let data = res.data.menus;
         let storeInfo = res.data.storeInfo;
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     flex: 1,
     // height: vh * 100,
-    paddingTop: vh * 5,
+    paddingTop: vh * 10,
   },
   profileContainer: {
     height: 40,
@@ -218,7 +220,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     tintColor: colors.primary,
     position: 'absolute',
-    bottom: 0,
+    bottom: 30,
   },
   btnContainer: {
     width: '65%',

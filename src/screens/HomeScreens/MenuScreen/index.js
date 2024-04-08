@@ -3,10 +3,16 @@ import React from 'react';
 import WebView from 'react-native-webview';
 import useMenuController from './useMenuController';
 import {styles} from './styles';
+import {REACT_APP_WEBVIEW_URL, REACT_APP_API_ENDPOINT_PROD} from '@env';
 
 const MenuScreen = () => {
   const {webViewLoading, webViewRef, user, handleDataFromWweb} =
     useMenuController();
+
+  const domainUrl = __DEV__
+    ? REACT_APP_WEBVIEW_URL
+    : REACT_APP_API_ENDPOINT_PROD;
+
   return (
     <View style={{height: '100%'}}>
       {webViewLoading && (
@@ -17,7 +23,7 @@ const MenuScreen = () => {
       <WebView
         ref={webViewRef}
         source={{
-          uri: `https://${user.store?.storeName}.buzztill.com?ismobapp=2`,
+          uri: `https://${user.store?.storeName}.${domainUrl}?ismobapp=2`,
           // uri: `http://192.168.0.117:3000?ismobapp=1`,
         }}
         onMessage={event => {

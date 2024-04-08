@@ -1,12 +1,15 @@
 import axios from 'axios';
 import {store} from '../store';
-import {REACT_APP_API_ENDPOINT} from '@env';
+import {REACT_APP_API_ENDPOINT, REACT_APP_API_ENDPOINT_PROD} from '@env';
 import {logout} from '../store/slices/userSlice';
 
 const version = 'v1/';
+const ApiBaseUrl = __DEV__
+  ? REACT_APP_API_ENDPOINT
+  : REACT_APP_API_ENDPOINT_PROD;
 
 const instance = axios.create({
-  baseURL: `${REACT_APP_API_ENDPOINT}${version}`,
+  baseURL: `${ApiBaseUrl}${version}`,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -17,12 +20,13 @@ instance.interceptors.request.use(
   config => {
     // You can add request headers or do other modifications here
     const state = store.getState();
+    const language = state.general.currentLanguage;
     if (state.user?.loginDetails?.x1Auth_SHA) {
       config.headers.Authorization = `Bearer ${state.user.loginDetails.token}`;
       config.headers['X1Auth-SHA'] = state.user.loginDetails.x1Auth_SHA;
       config.headers['X2Auth-SHB'] = state.user.loginDetails.x1Auth_SHB;
-      config.headers['X-LANG'] = '1';
-      config.headers['Access-Control-Allow-Origin'] = REACT_APP_API_ENDPOINT;
+      config.headers['X-LANG'] = language.value == 'mt' ? '2' : '1';
+      config.headers['Access-Control-Allow-Origin'] = ApiBaseUrl;
       config.headers['Access-Control-Allow-Credentials'] = true;
     }
     console.log(JSON.stringify(config.headers));

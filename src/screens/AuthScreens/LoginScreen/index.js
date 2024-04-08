@@ -90,6 +90,7 @@ const LoginScreen = () => {
                 width={width}
                 error={error}
                 currentForm={currentForm}
+                notYourStorePress={notYourStorePress}
                 setCurrentForm={setCurrentForm}
                 onLoginPress={onLoginPress}
                 store={store}

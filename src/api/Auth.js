@@ -16,8 +16,12 @@ const forgetPassEmail = async (data, headers) => {
   });
 };
 
-const getMenusService = data => {
-  return instance.get(endpoints.getMenus + data);
+const getMenusService = (data, lang) => {
+  return instance.get(endpoints.getMenus + data, {
+    headers: {
+      'X-LANG': lang?.value == 'mt' ? '2' : '1',
+    },
+  });
 };
 
 export {verifyRegistration, login, forgetPassEmail, getMenusService};

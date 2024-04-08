@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {icons} from '../../assets';
 
 const initialState = {
   btnLoader: false,
@@ -10,7 +11,7 @@ const initialState = {
     password: '',
   },
   rememberMe: false,
-  currentLanguage: {label: 'English', value: 'en'},
+  currentLanguage: {label: 'English', value: 'en', flag: icons.americanFlag},
   currentMenu: 'Sell',
 };
 
